@@ -6,12 +6,15 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-              TestSingleton();
+            TestSingleton();
 
-              TestFactory();
+            TestFactory();
 
-              TestMemento();
+            TestMemento();
+
+            TestBuilder();
         }
+
 
         /// <summary>
         /// A singleton is a class which only allows a single instance of it to be created. 
@@ -62,8 +65,28 @@ namespace DesignPatterns
             CareTaker<StateObject>.SaveState(current);
             current.ShowState();
 
-            CareTaker<StateObject>.RestoreState(current,0);
+            CareTaker<StateObject>.RestoreState(current, 0);
             current.ShowState();
+
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// The intent of the builder design pattern is to seperate 
+        /// the constructor of a complex object from its representation.
+        /// </summary>
+        private static void TestBuilder()
+        {
+            Director director = new Director();
+
+            IBuilder b1 = new ConcreteBuilder1();
+            IBuilder b2 = new ConcreteBuilder2();
+
+            director.Construct(b1);
+            Console.WriteLine(b1.GetProduct());
+
+            director.Construct(b2);
+            Console.WriteLine(b2.GetProduct());
 
             Console.ReadKey();
         }
